@@ -1,14 +1,14 @@
 package daoimpl;
 
-import bean.Student;
-import dao.IStudentDao;
-import utils.DBUtil;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import bean.Student;
+import dao.IStudentDao;
+import utils.DBUtil;
 
 public class StudentDaoImpl implements IStudentDao {
 
@@ -60,7 +60,7 @@ public class StudentDaoImpl implements IStudentDao {
 		return result;
 	}
 //new
-	public Student searchFor(String id, String examname){
+	public Student searchFor(String id,String examname){
 		// TODO Auto-generated method stub
 		Student student = new Student();
 		String sql = "select * from student where stu_id = ? and stu_exam=?";
@@ -111,7 +111,7 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 
 
-	public Student searchForIp(String ip, String examname) {
+	public Student searchForIp(String ip,String examname) {
 		// TODO Auto-generated method stub
 		Student student = new Student();
 		String sql = "select * from student where stu_ip = ? and stu_exam=?";
