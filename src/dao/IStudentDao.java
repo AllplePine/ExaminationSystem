@@ -14,14 +14,15 @@ import java.util.List;
 public interface IStudentDao {
 	/**
 	 * 学生登录
-	 * @param username 用户名
-	 * @param password 密码
+	 * @param stu_id id
+	 * @param stu_name 姓名
 	 * @return 返回登陆结果 登陆成功为true ,否则为false
 	 */
-	public boolean login(String username, String password);
+	public boolean login(String stu_id, String stu_name);
+	public boolean login(String stu_id, String stu_name, String stu_exam);
 	/**
 	 * 添加学生
-	 * @param Student 学生信息
+	 * @param student 学生信息
 	 * @return 更改数据库受影响的行数
 	 */
 	public int add(Student student);
@@ -45,10 +46,11 @@ public interface IStudentDao {
 	/**
 	 * 更改学生信息
 	 * @param username 根据主键用户名查询学生信息
-	 * @param Student 更改后的学生信息
+	 * @param student 更改后的学生信息
 	 */
 	public int update(Student student, String username);
 	public int updateIP(Student student, String username);
 	public Student searchFor(String id, String examname);
     public Student searchForIp(String ip, String examname);
+	public int updateForSubmit(Student student, String username);
 }

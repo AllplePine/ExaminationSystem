@@ -1,14 +1,14 @@
 package daoimpl;
 
+import bean.Teacher;
+import dao.ITeacherDao;
+import utils.DBUtil;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import bean.Teacher;
-import dao.ITeacherDao;
-import utils.*;
 
 public class TeacherDaoImpl implements ITeacherDao {
 
@@ -17,8 +17,8 @@ public class TeacherDaoImpl implements ITeacherDao {
 		// TODO Auto-generated method stub
 		// 查询此用户名和密码是否存在
 		String login = "";
-		Teacher teacher = search(username);
-		if (!teacher.getT_pwd().equals("")) {
+		Teacher teacher = search(username,password);
+		if (teacher!=null) {
 			if (teacher.getT_pwd().equals(password)) {
 				if (teacher.getT_manager()) {
 					login = "admin";
@@ -31,6 +31,27 @@ public class TeacherDaoImpl implements ITeacherDao {
 			login = "nothing";
 		}
 		return login;
+	}
+	public Teacher search(String username, String password){
+		Teacher teacher = null;
+		String sql = "select * from teacher where t_username = ? and t_pwd=?";
+		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
+		try {
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				teacher = new Teacher();
+				teacher.setT_username(rs.getString("t_username"));
+				teacher.setT_pwd(rs.getString("t_pwd"));
+				teacher.setT_name(rs.getString("t_name"));
+				teacher.setT_manager(rs.getBoolean("t_manager"));
+			} else {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teacher;
 	}
 
 	@Override
@@ -142,4 +163,3 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 
 }
-

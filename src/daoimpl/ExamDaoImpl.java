@@ -1,14 +1,15 @@
 package daoimpl;
 
+import bean.Exam;
+import dao.IExamDao;
+import utils.DBUtil;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.Exam;
-import dao.IExamDao;
-import utils.DBUtil;
 public class ExamDaoImpl implements IExamDao {
 
 	@Override
@@ -51,10 +52,20 @@ public class ExamDaoImpl implements IExamDao {
 		return result;
 	}
 
+	public void updateExamStart(Exam nearestExam){
+		String sql = "UPDATE exam SET e_isstart=true WHERE e_name=?";
+		int result = 0;
 
+		try (PreparedStatement ps = DBUtil.executePreparedStatement(sql)) {
+			//ps.setBoolean(1, nearestExam.getE_isstart());
+			ps.setString(1, nearestExam.getE_name());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public List<Exam> search() {
-		System.out.println("SEARCH HERE");
 		// TODO Auto-generated method stub
 		List<Exam> list = new ArrayList<Exam>();
 		String sql = "SELECT * FROM exam";

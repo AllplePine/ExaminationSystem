@@ -1,14 +1,14 @@
 package daoimpl;
 
+import bean.Student;
+import dao.IStudentDao;
+import utils.DBUtil;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import bean.Student;
-import dao.IStudentDao;
-import utils.DBUtil;
 
 public class StudentDaoImpl implements IStudentDao {
 
@@ -26,6 +26,41 @@ public class StudentDaoImpl implements IStudentDao {
 		return login;
 	}
 
+	public boolean login(String stu_id, String stu_name,String stu_exam) {
+		// TODO Auto-generated method stub
+		boolean login = false;
+		try{
+			Student student = searchStudent(stu_id,stu_name,stu_exam);
+			if (student.getStu_name().equals(stu_name)) {
+				login = true;
+			}
+		}catch (Exception e){}
+		return login;
+	}
+
+
+	public Student searchStudent(String username, String password, String examname){
+		Student student = new Student();
+		String sql = "select * from student where stu_id = ? and stu_exam=?";
+		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
+		try {
+			ps.setString(1, username);
+			ps.setString(2, examname);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				student.setStu_id(rs.getString("stu_id"));
+				student.setStu_name(rs.getString("stu_name"));
+				student.setStu_class(rs.getString("stu_class"));
+				student.setStu_exam(rs.getString("stu_exam"));
+				student.setStu_ip(rs.getString("stu_ip"));
+				student.setStu_submit(rs.getString("stu_submit"));
+			} else {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return student;
+	}
 	@Override
 	public int add(Student student) {
 		// TODO Auto-generated method stub
@@ -60,7 +95,7 @@ public class StudentDaoImpl implements IStudentDao {
 		return result;
 	}
 //new
-	public Student searchFor(String id,String examname){
+	public Student searchFor(String id, String examname){
 		// TODO Auto-generated method stub
 		Student student = new Student();
 		String sql = "select * from student where stu_id = ? and stu_exam=?";
@@ -111,8 +146,7 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 
 
-	public Student searchForIp(String ip,String examname) {
-		// TODO Auto-generated method stub
+	public Student searchForIp(String ip, String examname) {
 		Student student = new Student();
 		String sql = "select * from student where stu_ip = ? and stu_exam=?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
@@ -180,6 +214,17 @@ public class StudentDaoImpl implements IStudentDao {
 	public int updateIP(Student student, String username) {
 		String spl = "update student set stu_ip= '"
 				+ student.getStu_ip() + "' where stu_id='" + username + "' and stu_exam='"+student.getStu_exam()+"'";
+		int result = 0;
+		try {
+			result = DBUtil.executeUpdate(spl);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int updateForSubmit(Student student, String username) {
+		String spl = "update student set stu_submit= '"
+				+ student.getStu_submit() + "' where stu_id='" + username + "' and stu_exam='"+student.getStu_exam()+"'";
 		int result = 0;
 		try {
 			result = DBUtil.executeUpdate(spl);
