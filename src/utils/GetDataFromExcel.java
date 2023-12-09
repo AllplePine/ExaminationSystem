@@ -3,27 +3,25 @@ package utils;
 import bean.Student;
 import jxl.Sheet;
 import jxl.Workbook;
-import jxl.read.biff.BiffException;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GetDataFromExcel {
-	public static List<Student> getAllByExcel(String path) throws IOException{
+	public static List<Student> getAllByExcel(String path) throws Exception{
 		File filePath;
 		System.out.println(path);
 		try {
 			filePath = new File(path);
 			//Workbook wb1 = Workbook.getWorkbook(filePath);
 		} catch (Exception e) {
-			filePath = new File(path);	
+			filePath = new File(path);
 		}
 		List<Student> list = new ArrayList<Student>();
 		System.out.print(filePath);
-		try {
+
 			Workbook wb = Workbook.getWorkbook(filePath);
 			//得到文件中第一个工作表格，若要得到全部用sheet[] sheets = wb.getSheets()
 			Sheet sheet = wb.getSheet(0);
@@ -40,15 +38,13 @@ public class GetDataFromExcel {
 					list.add(new Student(stuId,stuName,stuClass,"","",""));
 				}
 			}
-		} catch (BiffException e) {
-			e.printStackTrace();
-		}
-		
+
+
 		return list;
 	}
-	
-	public static boolean isExist(String stu_id){
-		String sql = "select * from student where stu_id = '"+stu_id+"'";
+
+	public static boolean isExist(String stu_id,String examname){
+		String sql = "select * from student where stu_id = '"+stu_id+"' and stu_exam='"+examname+"'";
 		ResultSet rs = DBUtil.executeQuery(sql);
 		try {
 			if(rs.next())
