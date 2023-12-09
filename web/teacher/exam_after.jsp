@@ -56,8 +56,12 @@
 							+ "&id=1' title='下载考生答案' class='btn btn-info'><span class=\"glyphicon glyphicon-floppy-save\"></span> 下载</a>");
 					Config c = (Config)request.getServletContext().getAttribute("config");
 					if(c.isCandelete()){
-							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname=" + exam.getE_name()+ "&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
-						
+						if(!exam.getE_file()){
+							sb.append("&nbsp;&nbsp;<a disabled='disabled' href='#'"+"&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
+						}else{
+							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname=" + exam.getE_name()
+									+ "&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
+						}
 					}
 				} else
 					sb.append("");
@@ -82,6 +86,20 @@
 			<%=sb.toString()%>
 		</table>
 	</div>
+	<script type="text/javascript">
+		$(".clear_btn").click(function() {
+			var href = $(this).attr("href");
+
+			if (href === '#') {
+				alert("请先下载（如已经下载请尝试刷新页面）");
+				return false; // Prevent default action (don't follow the link)
+			} else {
+				var confirmClear = confirm("确定清除考试资料?");
+
+				return confirmClear; // Allow or prevent the default action based on user confirmation
+			}
+		});
+	</script>
 
 </body>
 </html>
