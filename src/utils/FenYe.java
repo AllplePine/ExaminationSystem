@@ -36,9 +36,8 @@ public class FenYe extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 		HttpSession session = request.getSession();
-		List<Exam> list2=DaoFactory.getExamDaoInstance().search();
+		List<Exam> list2= DaoFactory.getExamDaoInstance().search();
 		String  examname=(String)request.getParameter("exam");
-		System.out.println(examname);
 		String flag="1";
 		session.setAttribute("exam", null);
 		if(examname==null)
@@ -53,7 +52,7 @@ public class FenYe extends HttpServlet {
 		if(examname==null) examname="无";
 		int pages; // 总页数
 		int count=0;// 记录总条数
-		List<Student> list=DaoFactory.getStudentDaoInstance().search();
+		List<Student> list= DaoFactory.getStudentDaoInstance().search();
 		List<Student> list_exist = new ArrayList<>();
 		for(Student s:list)
 		{
@@ -61,7 +60,8 @@ public class FenYe extends HttpServlet {
 				list_exist.add(s);
 				count++;}
 		}
-		int pageSize = 5; // 设置每页显示5条记录
+		Config config = (Config)request.getServletContext().getAttribute("config");
+		int pageSize = config.getPagesize();
 		// 计算总页数
 		if (count % pageSize == 0) {
 			pages = count / pageSize; // 总页数
