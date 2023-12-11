@@ -11,7 +11,7 @@
  Target Server Version : 50540
  File Encoding         : 65001
 
- Date: 29/11/2023 12:28:22
+ Date: 11/12/2023 23:37:35
 */
 
 SET NAMES utf8mb4;
@@ -74,6 +74,7 @@ CREATE TABLE `teacher`  (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('admin', 'admin', 'admin', 1);
+INSERT INTO `teacher` VALUES ('admin', '123', 'Administrator', 1);
+INSERT INTO `teacher` VALUES ('teacher', '123', 'Teacher', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
