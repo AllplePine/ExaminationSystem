@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DBUtil {
 	
-	private static final String URL="jdbc:mysql://localhost:3306/exam";//自行改自己数据库名字
-	private static final String USER = "root";//&autoReconnect=true&failOverReadOnly=false//数据库用户名
-	private static final String PASSWORD = "root";//useSSL=true&useUnicode=true&characterEncoding=utf-8//数据库密码
+	private static final String URL="jdbc:mysql://localhost:3306/exam";//数据库名字
+	private static final String USER = "root";//数据库用户名
+	private static final String PASSWORD = "root";//数据库密码
 	
 	protected static Statement s = null;
 	protected static ResultSet rs = null;

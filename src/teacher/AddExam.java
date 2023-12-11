@@ -18,23 +18,14 @@ import java.util.List;
 public class AddExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public AddExam() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String examname = request.getParameter("examname");
 		String exam_starttime = request.getParameter("exam_starttime");
 		String[] exam_autostart = request.getParameterValues("exam_autostart");
@@ -73,7 +64,6 @@ public class AddExam extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
