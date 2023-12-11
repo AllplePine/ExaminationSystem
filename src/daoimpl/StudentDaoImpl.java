@@ -14,7 +14,6 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public boolean login(String username, String password) {
-		// TODO Auto-generated method stub
 		boolean login = false;
 		try{
 			Student student = search(username);
@@ -27,7 +26,6 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 
 	public boolean login(String stu_id, String stu_name,String stu_exam) {
-		// TODO Auto-generated method stub
 		boolean login = false;
 		try{
 			Student student = searchStudent(stu_id,stu_name,stu_exam);
@@ -63,7 +61,6 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 	@Override
 	public int add(Student student) {
-		// TODO Auto-generated method stub
 		int result = 0;
 		String insert = "insert into student (stu_id,stu_name,stu_class,stu_exam) values(?,?,?,?)";
 		PreparedStatement ps = DBUtil.executePreparedStatement(insert);
@@ -83,7 +80,6 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public int delete(String username) {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			String sql = "delete from student where stu_id='" + username + "'";
@@ -96,7 +92,6 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 //new
 	public Student searchFor(String id, String examname){
-		// TODO Auto-generated method stub
 		Student student = new Student();
 		String sql = "select * from student where stu_id = ? and stu_exam=?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
@@ -123,7 +118,6 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public Student search(String username) {
-		// TODO Auto-generated method stub
 		Student student = new Student();
 		String sql = "select * from student where stu_id = ?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
@@ -172,7 +166,6 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public List<Student> search() {
-		// TODO Auto-generated method stub
 		List<Student> list = new ArrayList<Student>();
 		String sql = "SELECT * FROM student";
 		try {
@@ -197,7 +190,6 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public int update(Student student, String username) {
-		// TODO Auto-generated method stub
 		String spl = "update student set stu_name= '" + student.getStu_name() + "',stu_class= '"
 				+ student.getStu_class() + "',stu_submit= '" + student.getStu_submit() + "',stu_ip= '"
 				+ student.getStu_ip() + "',stu_exam= '" + student.getStu_exam() + "' where stu_id='" + username + "'";

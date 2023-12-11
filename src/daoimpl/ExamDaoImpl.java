@@ -202,7 +202,6 @@ public class ExamDaoImpl implements IExamDao {
 
 	@Override
 	public Exam search(String examname) {
-		// TODO Auto-generated method stub
 		Exam exam = new Exam();
 		String sqlSearch = "select * from exam where e_name='" + examname + "'";
 		ResultSet rs = null;

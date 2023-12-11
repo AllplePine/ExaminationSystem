@@ -24,14 +24,12 @@ public class ManageUnlocked extends HttpServlet {
      */
     public ManageUnlocked() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		List<Student> list= DaoFactory.getStudentDaoInstance().search();
 		StringBuffer sb=new StringBuffer();
@@ -68,7 +66,6 @@ public class ManageUnlocked extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

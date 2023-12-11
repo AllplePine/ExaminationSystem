@@ -14,7 +14,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public String login(String username, String password) {
-		// TODO Auto-generated method stub
 		// 查询此用户名和密码是否存在
 		String login = "";
 		Teacher teacher = search(username,password);
@@ -56,7 +55,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public int add(Teacher teacher) {
-		// TODO Auto-generated method stub
 		// 编写sql语句
 		String sql = "insert into teacher(t_username,t_pwd,t_name,t_manager) values (?,?,?,?)";
 
@@ -64,7 +62,7 @@ public class TeacherDaoImpl implements ITeacherDao {
 //			DesUtils des = new DesUtils("leemenz");
 //			teacher.setT_pwd(des.encrypt(teacher.getT_pwd()));
 //			System.out.println("成功");
-//		} catch (Exception e1) { // TODO Auto-generated catch block
+//		} catch (Exception e1) {
 //			e1.printStackTrace();
 //			System.out.println("失败");
 //		}
@@ -88,7 +86,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public int delete(String username) {
-		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			String sql = "delete from teacher where t_username='" + username + "'";
@@ -102,7 +99,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public List<Teacher> search() {
-		// TODO Auto-generated method stub
 		List<Teacher> list = new ArrayList<Teacher>();
 		String sql = "SELECT * FROM teacher";
 		try {
@@ -124,7 +120,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public int update(Teacher teacher, String username) {
-		// TODO Auto-generated method stub
 		// sql
 		String spl = "update teacher set t_pwd= '" + teacher.getT_pwd() + "',t_name= '" + teacher.getT_name()
 				+ "',t_manager= " + teacher.getT_manager() + " where t_username='" + username + "'";
@@ -139,7 +134,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public Teacher search(String username) {
-		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		String sql = "select * from teacher where t_username = ?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
