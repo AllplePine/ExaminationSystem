@@ -26,7 +26,6 @@ public class ChangeTeacherPwd extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("teacher");
@@ -37,18 +36,6 @@ public class ChangeTeacherPwd extends HttpServlet {
 		String newPwd2 = request.getParameter("newPwd2");
 		System.out.println(newPwd1 + newPwd2);
 		System.out.println(oldPwd);
-//		try {
-//			DesUtils des = new DesUtils("leemenz");
-//			newPwd1 = des.encrypt(newPwd1);
-//			System.out.println(newPwd1);
-//			newPwd2	= des.encrypt(newPwd2);
-//			System.out.println(newPwd2);
-//			oldPwd	= des.encrypt(oldPwd);
-//			System.out.println(oldPwd);
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//			System.out.println("失败");
-//		}
 		Teacher teacher = DaoFactory.getTeacherDaoInstance().search(id);
 		System.out.println(teacher.getT_pwd());
 		if (teacher.getT_pwd().equals(oldPwd) && newPwd1.equals(newPwd2) && newPwd1 != null) {

@@ -1,68 +1,62 @@
 package utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ToZip {
 	private ToZip(){}
-	
-	public static boolean fileToZip(String sourceFilePath,String zipFilePath,String filename){
-		
-		boolean flag = false;
-		File sourceFile = new File(sourceFilePath);
-		FileInputStream fis = null;
-		BufferedInputStream bis = null;
-		FileOutputStream fos = null;
-		ZipOutputStream zos = null;
-		
-		if(sourceFile.exists() == false){
-			System.out.println("带压缩的目录不存在");
-		}else{
-			try {
-				File zipFile = new File(zipFilePath+"/"+filename+".zip");
-				if(zipFile.exists())
-					System.out.println("目录下已存在该文件");
-				else{
-					File[] sourceFiles = sourceFile.listFiles();
-					if(null == sourceFiles || sourceFiles.length<1){
-						System.out.println("带压缩的文件下没有文件，不需要压缩");
-					}else{
-						fos = new FileOutputStream(zipFile);
-						zos = new ZipOutputStream(new BufferedOutputStream(fos));
-						byte[] bufs = new byte[1024*10];
-						for(int i=0;i<sourceFiles.length;i++){
-							//创建zip实体类，并添加进压缩包
-							ZipEntry zipEntry = new ZipEntry(sourceFiles[i].getName());
-							zos.putNextEntry(zipEntry);
-							//读取待压缩的文件并写进压缩包里
-							fis = new FileInputStream(sourceFiles[i]);
-							bis = new BufferedInputStream(fis,1024*10);
-							int read = 0;
-							while((read = bis.read(bufs,0,1024*10))!= -1)
-								zos.write(bufs, 0, read);
-						}
-						flag = true;
-					}
-					
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}finally {
-				try {
-					if(bis != null) bis.close();
-					if(zos != null) zos.close();
-				} catch (IOException e2) {
-					e2.printStackTrace();
-					throw new RuntimeException(e2);
+
+	private static void compressFolder(String sourceFolder, String folderName, ZipOutputStream zipOutputStream) throws IOException {
+		File folder = new File(sourceFolder);
+		File[] files = folder.listFiles();
+
+		if (files != null) {
+			for (File file : files) {
+				if (file.isDirectory()) {
+					// 压缩子文件夹
+					compressFolder(file.getAbsolutePath(), folderName + "/" + file.getName(), zipOutputStream);
+				} else {
+					// 压缩文件
+					addToZipFile(folderName + "/" + file.getName(), file.getAbsolutePath(), zipOutputStream);
 				}
 			}
 		}
-		
-		return flag;
+	}
+	private static void addToZipFile(String fileName, String fileAbsolutePath, ZipOutputStream zipOutputStream) throws IOException {
+		// 创建ZipEntry对象并设置文件名
+		ZipEntry entry = new ZipEntry(fileName);
+		zipOutputStream.putNextEntry(entry);
+
+		// 读取文件内容并写入Zip文件
+		try (FileInputStream fileInputStream = new FileInputStream(fileAbsolutePath)) {
+			byte[] buffer = new byte[1024];
+			int bytesRead;
+			while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+				zipOutputStream.write(buffer, 0, bytesRead);
+			}
+		}
+
+		// 完成当前文件的压缩
+		zipOutputStream.closeEntry();
+	}
+
+	public static boolean fileToZip(String sourceFilePath,String zipFilePath,String filename) {
+		String zipFileName = filename;
+		String folderToCompress = sourceFilePath;
+		boolean success = false;
+		try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFilePath+"/"+filename+".zip"))) {
+			// 压缩文件夹
+			compressFolder(folderToCompress, zipFileName, zipOutputStream);
+
+			System.out.println("Folder compressed successfully!");
+			success=true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return success;
 	}
 }

@@ -26,7 +26,6 @@ public class ExamListener implements ServletContextListener {
         this.sc = arg0.getServletContext();
         String configPath = this.sc.getRealPath("") + Config.CONFIG_FILE;
         File configFile = new File(configPath);
-      //  configFile.
         Config config;
         if (configFile.exists()) {
             config = ConfigUtil.parseConfig(configFile);
@@ -39,17 +38,15 @@ public class ExamListener implements ServletContextListener {
         this.sc.setAttribute("configPath", configPath);
         List<Exam> le = examDao.search();
         List<Exam> list = DaoFactory.getExamDaoInstance().search();
-       // String examname = (String)sc.getAttribute("examname");
 		for (Exam exam : list) {
 			if (exam.getE_isstart()) {
-				//examname = exam.getE_name();
                 this.sc.setAttribute("examname", exam.getE_name());
 			}
 		}
 
         this.timer = new Timer();
         long delay = (long)(config.getInterval()*1000);
-        this.timer.schedule(new ExamListener.checkExamTask(), delay);
+        this.timer.schedule(new checkExamTask(), delay);
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {

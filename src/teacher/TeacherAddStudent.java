@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-/**
- * Servlet implementation class TeacherAddStudent
- */
 @WebServlet("/TeacherAddStudent")
 public class TeacherAddStudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;

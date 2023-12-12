@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>在线考试系统</title>
+<title>上机考试管理系统</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/signin.css" rel="stylesheet">
 <style type="text/css">
@@ -32,14 +32,14 @@
           		<span class="input-group-addon">
            			<span class="glyphicon glyphicon-user"></span>
           		</span>
-          		<input type="text" class="input-lg form-control input-font-size" name="ad_id" 
+          		<input type="text" class="input-lg form-control input-font-size" name="t_username"
          		style="width:260px;" placeholder="账号" required autofocus >
         	</div><br />
 		 	<div class="col-xs-offset-1 col-xs-10 input-group">
          	<span class="input-group-addon">
             	<span class="glyphicon glyphicon-lock"></span>
           	</span>
-          		<input type="password" class="input-lg form-control input-font-size" name="ad_username" 
+          		<input type="password" class="input-lg form-control input-font-size" name="t_pwd"
           		style="width:260px;" placeholder="密码" required>
         	</div><br />	
         

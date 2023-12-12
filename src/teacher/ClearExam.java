@@ -12,14 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Servlet implementation class ClearExam
+ */
 @WebServlet("/ClearExam")
 public class ClearExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public ClearExam() {
         super();
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String examname = request.getParameter("examname");
 		String id = request.getParameter("id");
@@ -63,29 +72,20 @@ public class ClearExam extends HttpServlet {
 	}
 
 	public static Boolean deleteFile(File file) {
-		//判断文件不为null或文件目录存在
 		if (file == null || !file.exists()) {
 			System.out.println("文件删除失败,请检查文件是否存在以及文件路径是否正确");
 			return false;
 		}
-		//获取目录下子文件
 		File[] files = file.listFiles();
-		//遍历该目录下的文件对象
 		for (File f : files) {
-			//判断子目录是否存在子目录,如果是文件则删除
 			if (f.isDirectory()) {
-				//递归删除目录下的文件
 				deleteFile(f);
 			} else {
-				//文件删除
 				f.delete();
-				//打印文件名
-				//System.out.println("文件名：" + f.getName());
 			}
 		}
 		//文件夹删除
 		file.delete();
-		//System.out.println("目录名：" + file.getName());
 		return true;
 	}
 }

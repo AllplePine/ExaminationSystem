@@ -17,9 +17,7 @@ public class AddTeacher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//设置请求的字符编码utf-8
 		request.setCharacterEncoding("utf-8");
-		//将获取的表单数据存入Teacher
 		Teacher teacher=new Teacher();
 		boolean isManager = false;
 		
@@ -27,7 +25,6 @@ public class AddTeacher extends HttpServlet {
 		teacher.setT_pwd(request.getParameter("pwd"));
 		teacher.setT_name(request.getParameter("name"));
 		String[] manager = request.getParameterValues("manager");
-		//判断manager数组是否为空
 		if(manager == null){
 			isManager = false;
 		}else{
@@ -35,8 +32,7 @@ public class AddTeacher extends HttpServlet {
 		}
 		teacher.setT_manager(isManager);
 		
-		int result= DaoFactory.getTeacherDaoInstance().add(teacher);
-		//如果执行成功跳转页面
+		int result=DaoFactory.getTeacherDaoInstance().add(teacher);
 		if(result > 0)
 			response.sendRedirect("admin/manage_teacher.jsp");
 	}

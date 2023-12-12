@@ -4,9 +4,7 @@ import bean.Student;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import utils.DBUtil;
-import utils.DaoFactory;
-import utils.GetDataFromExcel;
+import utils.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +12,6 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.List;
 
-/**
- * Servlet implementation class ImportStuFromExcel
- */
 @WebServlet("/ImportStuFromExcel")
 public class ImportStuFromExcel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -112,8 +107,6 @@ public class ImportStuFromExcel extends HttpServlet {
 			e.printStackTrace();
 
 		}
-		//System.out.println(message);
-
 		String path = this.getServletContext().getRealPath("/WEB-INF/upload/" + examname + "/" + filename);
 		try {
 			List<Student> list = GetDataFromExcel.getAllByExcel(path);

@@ -14,60 +14,35 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 
-/**
- * Servlet implementation class ExamDownload
- */
 @WebServlet("/ExamDownload")
 public class ExamDownload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ExamDownload() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-        //上传的文件都是保存在/WEB-INF/upload目录下的子目录当中
         HttpSession session=request.getSession();
 		String examname = (String) session.getAttribute("examname");
         String fileSaveRootPath=this.getServletContext().getRealPath("/WEB-INF/upload/"+examname);
-        //得到要下载的文件名
         String fileName = "";
         fileName = new String(fileName.getBytes("iso8859-1"),"UTF-8");
         Exam exam=DaoFactory.getExamDaoInstance().search(examname);
         fileName=exam.getE_examination();
-        //得到要下载的文件
-        //File file = new File(fileSaveRootPath + "/" + fileName);
-        //设置响应头，控制浏览器下载该文件
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-        //读取要下载的文件，保存到文件输入流
         FileInputStream in = new FileInputStream(fileSaveRootPath + "/" + fileName);
-        //创建输出流
         OutputStream out = response.getOutputStream();
-        //创建缓冲区
         byte buffer[] = new byte[1024];
         int len = 0;
-        //循环将输入流中的内容读取到缓冲区当中
         while((len=in.read(buffer))>0){
-            //输出缓冲区的内容到浏览器，实现文件下载
             out.write(buffer, 0, len);
         }
-        //关闭文件输入流
         in.close();
-        //关闭输出流
         out.close();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

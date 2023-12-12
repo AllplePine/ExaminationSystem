@@ -30,8 +30,8 @@
 			sb.append("</td><td>");
 			if (exam.getE_isstart()) {
 				sb.append("<a href='student_main.jsp"+ "' title='参加考试' class='btn btn-primary btn-sm'>参加考试</a>");
-			} else
-				sb.append("<span>考试已结束</span>");
+			} else if(exam.getE_isend()) sb.append("<span>考试已结束</span>");
+			else sb.append("<span>考试未开始</span>");
 			sb.append("</td></tr>");
 		}
 	%>

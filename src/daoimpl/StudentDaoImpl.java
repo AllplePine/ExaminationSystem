@@ -37,7 +37,7 @@ public class StudentDaoImpl implements IStudentDao {
 	}
 
 
-	public Student searchStudent(String username, String password, String examname){
+	public Student searchStudent(String username, String password,String examname){
 		Student student = new Student();
 		String sql = "select * from student where stu_id = ? and stu_exam=?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);

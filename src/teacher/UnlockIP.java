@@ -20,16 +20,15 @@ public class UnlockIP extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String stu_id=request.getParameter("id");
 		String examname=request.getParameter("examname");
-		List<Student> list= DaoFactory.getStudentDaoInstance().search();
+		List<Student> list=DaoFactory.getStudentDaoInstance().search();
 		for(Student stu:list)
 		{
 			if(stu.getStu_id().equals(stu_id)&&stu.getStu_exam().equals(examname))
 			{
 				stu.setStu_ip("null");
-				int result= DaoFactory.getStudentDaoInstance().updateIP(stu, stu_id);
+				int result=DaoFactory.getStudentDaoInstance().updateIP(stu, stu_id);
 				if(result>0)
 				{
-					//HttpSession session=request.getSession();
 					response.sendRedirect("teacher/manage_unlock.jsp");
 					return;
 				}

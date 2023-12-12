@@ -16,15 +16,11 @@ import java.util.List;
 public class StudentLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 		request.setCharacterEncoding("utf-8");
-		// 获取用户名和密码
 		String stu_id = request.getParameter("stu_id");
 		String stu_name = request.getParameter("stu_username");
-		//获取考试信息
-		String stu_exam = (String) request.getSession().getAttribute("examname");
-		//读取ip地址
+		String stu_exam =(String) request.getSession().getAttribute("examname");
+		System.out.println("stu_exam:"+stu_exam);
 		String ip = request.getHeader("x-forwarded-for");
 		if (null == ip || 0 == ip.length() || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
@@ -38,7 +34,13 @@ public class StudentLogin extends HttpServlet {
 		if (null == ip || 0 == ip.length() || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
-		boolean login = DaoFactory.getStudentDaoInstance().login(stu_id, stu_name);
+		System.out.println("x-forwarded-for: " + request.getHeader("x-forwarded-for"));
+		System.out.println("Proxy-Client-IP: " + request.getHeader("Proxy-Client-IP"));
+		System.out.println("WL-Proxy-Client-IP: " + request.getHeader("WL-Proxy-Client-IP"));
+		System.out.println("X-Real-IP: " + request.getHeader("X-Real-IP"));
+		System.out.println("RemoteAddr: " + request.getRemoteAddr());
+		System.out.println(ip);
+		boolean login = DaoFactory.getStudentDaoInstance().login(stu_id, stu_name,stu_exam);
 		boolean can = false;
 		if(login){
 			List<Student> list = DaoFactory.getStudentDaoInstance().search();
@@ -46,12 +48,12 @@ public class StudentLogin extends HttpServlet {
 				if (stu.getStu_id().equals(stu_id) && stu.getStu_exam().equals(stu_exam)) {
 					if(stu.getStu_ip()==null || stu.getStu_ip().equals("null")){
 						Student s = DaoFactory.getStudentDaoInstance().searchForIp(ip,stu_exam);
-						if(s==null)
-						{
-							can = true;
-							stu.setStu_ip(ip);
-							DaoFactory.getStudentDaoInstance().updateIP(stu, stu_id);
-						}
+							if(s==null){
+								can = true;
+								stu.setStu_ip(ip);
+								System.out.println("初次登陆StudentLogin 45");
+								DaoFactory.getStudentDaoInstance().updateIP(stu, stu_id);
+							}
 						}
 					else if(stu.getStu_ip().equals(ip)){
 						can = true;
@@ -64,7 +66,6 @@ public class StudentLogin extends HttpServlet {
 
 			if (login && can) {
 				Student student = DaoFactory.getStudentDaoInstance().searchFor(stu_id,stu_exam);
-				//判断有无考试进行,student非空表示当前考试为其参加的考试
 				if (student!=null) {
 						//进入考试界面
 						String savePath = this.getServletContext().getRealPath("/WEB-INF/upload/" + stu_exam+"/"+stu_id);

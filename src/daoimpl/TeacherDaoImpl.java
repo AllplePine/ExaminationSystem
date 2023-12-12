@@ -2,7 +2,7 @@ package daoimpl;
 
 import bean.Teacher;
 import dao.ITeacherDao;
-import utils.DBUtil;
+import utils.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public String login(String username, String password) {
-		// 查询此用户名和密码是否存在
 		String login = "";
 		Teacher teacher = search(username,password);
 		if (teacher!=null) {
@@ -31,7 +30,7 @@ public class TeacherDaoImpl implements ITeacherDao {
 		}
 		return login;
 	}
-	public Teacher search(String username, String password){
+	public Teacher search(String username,String password){
 		Teacher teacher = null;
 		String sql = "select * from teacher where t_username = ? and t_pwd=?";
 		PreparedStatement ps = DBUtil.executePreparedStatement(sql);
@@ -57,15 +56,6 @@ public class TeacherDaoImpl implements ITeacherDao {
 	public int add(Teacher teacher) {
 		// 编写sql语句
 		String sql = "insert into teacher(t_username,t_pwd,t_name,t_manager) values (?,?,?,?)";
-
-//		try {
-//			DesUtils des = new DesUtils("leemenz");
-//			teacher.setT_pwd(des.encrypt(teacher.getT_pwd()));
-//			System.out.println("成功");
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//			System.out.println("失败");
-//		}
 
 		int result = 0;
 		// 动态为sql的参数赋值

@@ -103,9 +103,9 @@ public class ExamUpload extends HttpServlet {
 				}
 			}
 			session.setAttribute("uploadexam", filename);
-			Exam exam= DaoFactory.getExamDaoInstance().search(examname);
+			Exam exam=DaoFactory.getExamDaoInstance().search(examname);
 			exam.setE_examination(filename);
-			int result= DaoFactory.getExamDaoInstance().update(exam, examname);
+			int result=DaoFactory.getExamDaoInstance().update(exam, examname);
 			// 如果执行成功跳转页面
 			if (result > 0) {
 				response.sendRedirect("teacher/add_exam.jsp");
@@ -121,9 +121,6 @@ public class ExamUpload extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

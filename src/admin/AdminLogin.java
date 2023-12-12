@@ -22,9 +22,8 @@ public class AdminLogin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
-		// 获取用户名和密码
 		String username = request.getParameter("t_username");
 		String password = request.getParameter("t_pwd");
 		ITeacherDao teacherDaoInstance = DaoFactory.getTeacherDaoInstance();

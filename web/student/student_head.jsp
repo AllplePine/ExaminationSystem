@@ -15,9 +15,9 @@
 </head>
 
 <style type="text/css">
-body {
-	background:#e8f2fe;
-}
+	body {
+		background:rgba(248,248,255,0.7);
+	}
 .title2{
 	color: #fafafa;
 	letter-spacing: 0;
@@ -46,7 +46,7 @@ body {
 						class="glyphicon glyphicon-eye-open"></span>查看提交</a></li>
 			</ul>
 			<ul class="nav navbar-nav" style="float: right">
-				<li><a>欢迎 <%=stu_name%> 同学</a></li>
+				<li><a><span class="glyphicon glyphicon-education" aria-hidden="true"></span> <%=stu_name%> 同学,欢迎回来</a></li>
 				<li><a href="../index.jsp"> 退出 </a></li>
 			</ul>
 		</div>

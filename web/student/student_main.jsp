@@ -47,17 +47,6 @@ body {
 	<%
 		String stu_id = (String) session.getAttribute("stu_id");
 		String examname = (String)session.getAttribute("examname");
-		//查询此用户名和密码是否存在
-		//String sqlSearch = "select * from student where stu_id='"+stu_id+"'";
-
-//		List<Student> list = DaoFactory.getStudentDaoInstance().search();
-//
-//		for (Student student : list) {
-//			if (student.getStu_id().equals(stu_id)) {
-//				examname = student.getStu_exam();
-//				session.setAttribute("examname", examname);
-//			}
-//		}
 
 	%>
 <jsp:include page="student_head.jsp"></jsp:include>
@@ -65,7 +54,7 @@ body {
 		<div class="row">
 			<div class="col-md-6">
 				<div class="alert navbar-inverse "
-					style="background-color: #e0e0e0; height: 350px; margin-top: 20px;">
+					style="background-color: #F0F8FF; height: 214px; margin-top: 20px;">
 					<h3>
 						<strong>试卷下载</strong>
 					</h3>
@@ -81,7 +70,7 @@ body {
 			</div>
 			<div class="col-md-6">
 				<div class="alert navbar-inverse "
-					style="background-color: #e0e0e0; height: 350px; margin-top: 20px;">
+					style="background-color: #F0F8FF; height:fit-content; margin-top: 20px;padding: 10px">
 					<h3>
 						<strong>答案上传</strong>
 					</h3>
@@ -91,17 +80,19 @@ body {
 						method="post" style="margin-top: 12px; font-size: 18px">
 						<input type="file" id="file" name="file">
 						<button type="submit" onclick="return checkupload()"
-							style="margin-top: 10px;" class="btn btn-info">上传</button>
+							style="margin-top: 10px;" class="btn btn-info">
+							<span class="glyphicon glyphicon-saved"></span>
+							上传</button>
 					</form>
 				</div>
 			</div>
 		</div>
 
 		<div class="col-md-6">
-			<table id="show" class="table" style="color: red">
+			<h4><span class="glyphicon glyphicon-bullhorn" ></span>：</h4><br>
+			<table id="show" class="table table-condensed">
 			</table>
 		</div>
-
 	</div>
 </body>
 </html>

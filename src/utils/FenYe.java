@@ -13,27 +13,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Servlet implementation class FenYe
- */
 @WebServlet("/FenYe")
 public class FenYe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FenYe() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	
+
 		HttpSession session = request.getSession();
 		List<Exam> list2= DaoFactory.getExamDaoInstance().search();
 		String  examname=(String)request.getParameter("exam");
@@ -84,7 +73,6 @@ public class FenYe extends HttpServlet {
 
 
 		StringBuilder sb1 = new StringBuilder(); // 存放本页图书信息
-		// 取出本页的数据
 		for (int i = (currpage - 1) * pageSize; i < list_exist.size() && i < currpage * pageSize; i++) {
 			Student student = list_exist.get(i);
 			if(student.getStu_exam().equals(examname))

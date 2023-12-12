@@ -15,29 +15,19 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * Servlet implementation class ExamStart
- */
 @WebServlet("/ExamStart")
 public class ExamStart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ExamStart() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		HttpSession session=request.getSession();
 		String examname = (String) session.getAttribute("examname");
-		List<Exam> list= DaoFactory.getExamDaoInstance().search();
+		List<Exam> list=DaoFactory.getExamDaoInstance().search();
 		boolean isstart=true;
 		for(Exam exam :list)
 		{
@@ -48,9 +38,7 @@ public class ExamStart extends HttpServlet {
 		}
 		if(isstart)
 		{
-			//没有考试开启，可以考虑开启考试
-			Exam exam= DaoFactory.getExamDaoInstance().search(examname);
-			//判断是否符合时间
+			Exam exam=DaoFactory.getExamDaoInstance().search(examname);
 			Config config = (Config)request.getServletContext().getAttribute("config");
 			int timegap = config.getTimegap();
 			try{
@@ -66,7 +54,7 @@ public class ExamStart extends HttpServlet {
 			}
 			session.setAttribute("exam_start", isstart+"");
 			exam.setE_isstart(true);
-			int result= DaoFactory.getExamDaoInstance().update(exam, examname);
+			int result=DaoFactory.getExamDaoInstance().update(exam, examname);
 			if(result>0) {
 				response.sendRedirect("teacher/exam_before.jsp");
 			}
@@ -77,9 +65,6 @@ public class ExamStart extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

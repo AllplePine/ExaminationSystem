@@ -4,13 +4,6 @@ import bean.Student;
 
 import java.util.List;
 
-/**
- * 学生类dao 接口
- * @Description
- * @author jiangwen
- * @version
- *
- */
 public interface IStudentDao {
 	public boolean login(String stu_id, String stu_name);
 	public boolean login(String stu_id, String stu_name, String stu_exam);

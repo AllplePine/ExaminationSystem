@@ -12,29 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Servlet implementation class ManageUnlocked
- */
 @WebServlet("/ManageUnlocked")
 public class ManageUnlocked extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ManageUnlocked() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.setCharacterEncoding("utf-8");
-		List<Student> list= DaoFactory.getStudentDaoInstance().search();
+		List<Student> list=DaoFactory.getStudentDaoInstance().search();
 		StringBuffer sb=new StringBuffer();
 		String stu_id=request.getParameter("id");
-		List<Exam> list_= DaoFactory.getExamDaoInstance().search();
+		List<Exam> list_=DaoFactory.getExamDaoInstance().search();
 		String  examname=null;
 		for(Exam exam:list_)
 		{
@@ -62,9 +54,7 @@ public class ManageUnlocked extends HttpServlet {
 		response.sendRedirect("teacher/manage_unlock.jsp");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

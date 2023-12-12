@@ -14,10 +14,8 @@ public class ExamDaoImpl implements IExamDao {
 
 	@Override
 	public int add(Exam exam) {
-		// TODO Auto-generated method stub
 		String sql = "insert into exam(e_name,e_starttime,e_teacher,e_autostart,e_isend,e_file,e_clear,e_isstart) values (?,?,?,?,?,?,?,?)";
 		int result = 0;
-		// 动态为sql的参数赋值
 		try {
 			PreparedStatement ps = DBUtil.executePreparedStatement(sql);
 			ps.setString(1, exam.getE_name());//考试名称
@@ -66,7 +64,6 @@ public class ExamDaoImpl implements IExamDao {
 	}
 	@Override
 	public List<Exam> search() {
-		// TODO Auto-generated method stub
 		List<Exam> list = new ArrayList<Exam>();
 		String sql = "SELECT * FROM exam";
 		try {
