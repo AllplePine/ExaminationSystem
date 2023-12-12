@@ -59,7 +59,7 @@
 						if(!exam.getE_file()){
 							sb.append("&nbsp;&nbsp;<a disabled='disabled' href='#'"+"&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
 						}else{
-							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname=" + exam.getE_name()
+							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname='" + exam.getE_name()
 									+ "&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
 						}
 					}

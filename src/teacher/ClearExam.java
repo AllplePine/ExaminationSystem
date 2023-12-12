@@ -57,7 +57,7 @@ public class ClearExam extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(id.equals("1"))
+			if("1".equals(id))
 				response.sendRedirect("teacher/exam_after.jsp");
 			else
 				response.sendRedirect("admin/clear_exam.jsp");
