@@ -1,17 +1,28 @@
 package utils;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 public class DBUtil {
-	
-	private static final String URL="jdbc:mysql://localhost:3306/exam";
-	private static final String USER = "root";
-	private static final String PASSWORD = "root";
-	
+	private static Properties pro = new Properties();
+	private static  String URL;
+	private static  String USER;
+	private static  String PASSWORD;
+	static {
+		try {
+			pro.load(JDBCutils.class.getClassLoader().getResourceAsStream("druid.properties"));
+			URL = pro.getProperty("url");
+			USER = pro.getProperty("username");
+			PASSWORD=pro.getProperty("password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	protected static Statement s = null;
 	protected static ResultSet rs = null;
 	protected static Connection conn = null;
-	
+
 	public static synchronized Connection getConnection(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
