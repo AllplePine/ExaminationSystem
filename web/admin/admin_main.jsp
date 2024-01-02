@@ -18,22 +18,22 @@
 			<div class="col-md-4" style="padding-left: 5px; padding-right: 5px;">
 				<div class="alert navbar-inverse "
 					 style="background-color: #F0F8FF; height: 350px; margin-top: 20px;">
-					<strong style="margin-left: 20px; font-size: 18px">教师管理</strong>
+					<strong style="margin-left: 20px; font-size: 18px">考试清理</strong>
 					<ul class="list-group">
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 可以对教师用户进行增删改查操作，并可以指定特定教师作为系统管理员</li>
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 系统可以有多个管理员</li>
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 如果没有任何一个教师具有管理员身份，则默认管理员登录信息有效</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 清楚考试的相关数据，包括数据库中的信息，文件系统中的提交文件</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 只有在主考教师已经包下载学生提交文件后才可以进行</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 清理后的考试可以删除</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-4" style="padding-left: 5px; padding-right: 5px;">
 				<div class="alert navbar-inverse "
 					 style="background-color: #F0F8FF; height: 350px; margin-top: 20px">
-					<strong style="margin-left: 20px; font-size: 18px">考试清理</strong>
+					<strong style="margin-left: 20px; font-size: 18px">教师管理</strong>
 					<ul class="list-group">
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 清楚考试的相关数据，包括数据库中的信息，文件系统中的提交文件</li>
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 只有在主考教师已经包下载学生提交文件后才可以进行</li>
-						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 清理后的考试可以删除</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 可以对教师用户进行增删改查操作，并可以指定特定教师作为系统管理员</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 系统可以有多个管理员</li>
+						<li class="list-group-item"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> 如果没有任何一个教师具有管理员身份，则默认管理员登录信息有效</li>
 					</ul>
 
 				</div>
@@ -53,3 +53,4 @@
 	</div>
 </body>
 </html>
+http://47.113.202.40/exam

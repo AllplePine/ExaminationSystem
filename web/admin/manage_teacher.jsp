@@ -88,7 +88,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<span class="glyphicon glyphicon-th-list"></span>&nbsp;所有考试
+							<span class="glyphicon glyphicon-th-list"></span>&nbsp;教师信息
 						</h3>
 					</div>
 					<div class="panel-body">

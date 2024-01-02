@@ -31,7 +31,9 @@ public class ClearExam extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String examname = request.getParameter("examname");
+		System.out.println(examname);
 		String id = request.getParameter("id");
+
 		Exam exam = DaoFactory.getExamDaoInstance().search(examname);
 		if (exam.getE_file()==true)
 		{

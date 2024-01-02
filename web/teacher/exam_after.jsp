@@ -13,6 +13,7 @@
 		//查询所有考试信息
 		List<Exam> list = DaoFactory.getExamDaoInstance().searchFor((String) session.getAttribute("teacher"));
 		for (Exam exam : list) {
+			String examname = exam.getE_name();
 			sb.append("<tr><td>");
 			sb.append(exam.getE_name());
 			sb.append("</td><td>");
@@ -59,7 +60,9 @@
 						if(!exam.getE_file()){
 							sb.append("&nbsp;&nbsp;<a disabled='disabled' href='#'"+"&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
 						}else{
-							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname='" + exam.getE_name()
+							sb.append("&nbsp;&nbsp;<a href='../ClearExam?examname=" + examname
+									+ "&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
+							System.out.println("&nbsp;&nbsp;<a href='../ClearExam?examname=" + examname
 									+ "&id=1' title='清理考试' class='clear_btn btn btn-info'><span class=\"glyphicon glyphicon-remove\"></span> 清理考试</a>");
 						}
 					}
